@@ -98,7 +98,6 @@ syncdb command runs under the scene SQL to create tables, nice uh? All job done 
 
 
 
-
 We are done for now, if everything's ok and your project structure/content is the same of the part 1 branch of this
 tutorial (except folder bin/ lib/ lib64/ and include/ because I'm not going to upload them to github) you are ready
 for part 2!
