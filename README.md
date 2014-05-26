@@ -1,6 +1,7 @@
 django-bproject part 1
 ===============
 
+<<<<<<< HEAD
 Setup and run!
 --------------
 
@@ -81,7 +82,6 @@ You should see an output like this:
 ![syncdb](http://s29.postimg.org/4ieulqic7/My_Screenshot.png)
 
 syncdb command runs under the scene SQL to create tables, nice uh? All job done with 0 lines of raw sql.
-
 
 
 
