@@ -37,19 +37,7 @@ omit the last argument, in this case django-admin.py script will create a new on
 
 Good job! Now the folder django-bproject should look like:
 
-django-bproject/
-               |
-               |
-               manage.py
-               bproject/
-                       |
-                       |
-		       __init__.py
-		       settings.py
-		       urls.py
-		       wsgi.py
-
-
+![structure](http://s27.postimg.org/zehjcypmr/graph.png)
 
 Let's now install a virtualenv inside our folder, type `virtualenv path/to/your/django-bproject` where of course
 you should write your own path to the folder created some minutes ago instead of path/......
@@ -59,7 +47,7 @@ see the name of your app into (), that indicates that you're into another enviro
 
 Settings
 ----------
-Now we have to tweak some settings in order to procede. In the folder `bproject` there is a `settings.py` file, open
+Now we have to tweak some settings in order to proceed. In the folder `bproject` there is a `settings.py` file, open
 it and ignore almost everything, for now look at SECRET_KEY and DATABASES and INSTALLED_APPS variables.
 * SECRET_KEY: is a secret and should remain secret, it's created automatically (and randomly) by django and it provides
   cryptographic signing, don't share it for any reason with anyone.
@@ -69,3 +57,33 @@ it and ignore almost everything, for now look at SECRET_KEY and DATABASES and IN
   take a look at https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 * INSTALLED_APPS: we won't touch it for know, but remember that if you are going to create apps for your poject (`python
   manage.py startapp appname`) you should add it to INSTALLED_APPS, we will see why later.
+
+PostgreSQL initial setup
+----------
+Before next lines, you should assure that your postgres instance is configured and it's running. To configure it
+you should run the command `postgresql-setup initdb`, to start it depends a lot on you OS.
+
+We should now create a database and a user for our database, open your console and type `psql -U postgres`, now we are into
+postgresql console, let's create our user:
+	   *`CREATE ROLE buser;`
+
+this comand will create the user for us, now let's create the database and let's assing the ownership to our `buser`:
+     *`CREATE DATABASE bpro_test OWNER buser;`
+
+Don't forget to leave postgres console with `\q` before proceeding
+
+Sync & go
+----------
+Well done! We are ready to start making awesome stuff. We are going to create some tables, but without writing any sql
+for now; open your console, assure that you're in the project folder and type `python manage.py syncdb`
+
+You should see an output like this:
+![syncdb](http://s29.postimg.org/4ieulqic7/My_Screenshot.png)
+
+syncdb command runs under the scene SQL to create tables, nice uh? All job done with 0 lines of raw sql.
+
+
+
+
+We are done for now, if everything's ok and your project structure/content is the same of the part 1 branch of this
+tutorial you are ready for part 2!
