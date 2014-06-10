@@ -24,26 +24,40 @@ running something else you should read this https://pip.pypa.io/en/latest/instal
 Now that we have pip installed we can do the rest of the job easily, let's go ahead!
 
 Fire your console and type:
-`pip install virtualenv`
+`pip install virtualenv` (or probably `sudo pip install virtualenv` on Linux)
 
 virtualenv creates a virtual environment where we can mess around without caring to break something (if
 everything is done correctly, of course!)
 
-Let's create a folder for our project, let's call it django-bproject. Initialize the django-project typing 
-`django-admin.py startproject bproject django-bproject`
-the last two arguments are respectively the name of the folder where will live the "core" structure
-of our project and the folder where we want to initialize the django project. If you don't have a folder
-omit the last argument, in this case django-admin.py script will create a new one.
+Let's create a folder for our project, let's call it django-bproject. Let's now install a virtualenv
+inside our folder, type `virtualenv path/to/your/django-bproject` where of course
+you should write your own path to the folder created some minutes ago instead of path/......
+You should now see 4 additional folders inside django-bproject one:
+    * bin
+    * include
+    * lib
+    * lib64
+
+Let's now install Django! Activate first the virtualenv typing `. bin/activate` (note: you should be into
+django-bproject folder when typing that command), now that virtualenv is active type `bin/pip install django`.
+The command will install Django ONLY inside your virtualenv, this is particulary useful if you are going to
+manage different project with different dependencies/Django versions. If you want to exit the virtualenv
+just type `deactivate` in your console.
+
+If you are not into django-bproject folder enter it, it's now time to django-initialize our project
+typing `bin/django-admin.py startproject bproject .`, the last two arguments are respectively the name
+of the folder where will live the "core" structure of our project and the folder where we want to initialize
+the django project (. in this case is the folder where we are, so it should be django-bproject. If you haven't
+created a folder yet, you can omit the last argument, in this case django-admin.py script will create a new one
+with the same name of the project.
 
 Good job! Now the folder django-bproject should look like:
 
-![structure](http://s27.postimg.org/zehjcypmr/graph.png)
+![structure](http://s28.postimg.org/65b32s41p/struc.png)
 
-Let's now install a virtualenv inside our folder, type `virtualenv path/to/your/django-bproject` where of course
-you should write your own path to the folder created some minutes ago instead of path/......
 
-We can now work in the virtualenv, to try it enter the folder django-bproject and type `. bin/activate`. You should
-see the name of your app into (), that indicates that you're into another environment.
+We are ready to move on, the preparation has been quite long, but it teached you lot of basic concepts you will
+use quite often during your (hope long :) ) trip with Django.
 
 Settings
 ----------
@@ -61,14 +75,14 @@ it and ignore almost everything, for now look at SECRET_KEY and DATABASES and IN
 PostgreSQL initial setup
 ----------
 Before next lines, you should assure that your postgres instance is configured and it's running. To configure it
-you should run the command `postgresql-setup initdb`, to start it depends a lot on you OS.
+you should run the command `postgresql-setup initdb`; to start the server it depends a lot on your OS.
 
 We should now create a database and a user for our database, open your console and type `psql -U postgres`, now we are into
 postgresql console, let's create our user:
-	   *`CREATE ROLE buser;`
+ * `CREATE ROLE buser;`
 
 this comand will create the user for us, now let's create the database and let's assing the ownership to our `buser`:
-     *`CREATE DATABASE bpro_test OWNER buser;`
+ * `CREATE DATABASE bpro_test OWNER buser;`
 
 Don't forget to leave postgres console with `\q` before proceeding
 
@@ -86,4 +100,5 @@ syncdb command runs under the scene SQL to create tables, nice uh? All job done 
 
 
 We are done for now, if everything's ok and your project structure/content is the same of the part 1 branch of this
-tutorial you are ready for part 2!
+tutorial (except folder bin/ lib/ lib64/ and include/ because I'm not going to upload them to github) you are ready
+for part 2!
